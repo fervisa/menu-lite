@@ -1,0 +1,14 @@
+= simple_form_for @platillo do |f|
+  - if @platillo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@platillo.errors.count, "error")} prohibited this platillo from being saved:"
+      %ul
+        - @platillo.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.input :nombre
+  = f.input :tipo, collection: Platillo.tipos.keys
+  = f.input :descripcion
+
+  .actions
+    = f.button :submit

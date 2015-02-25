@@ -1,0 +1,25 @@
+%h1 Listing platillos
+
+%table
+  %thead
+    %tr
+      %th Nombre
+      %th Tipo
+      %th Descripcion
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @platillos.each do |platillo|
+      %tr
+        %td= platillo.nombre
+        %td= platillo.tipo
+        %td= platillo.descripcion
+        %td= link_to 'Show', platillo
+        %td= link_to 'Edit', edit_platillo_path(platillo)
+        %td= link_to 'Destroy', platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Platillo', new_platillo_path

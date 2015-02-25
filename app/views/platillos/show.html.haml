@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @platillo.nombre
+%p
+  %b Tipo:
+  = @platillo.tipo
+%p
+  %b Descripcion:
+  = @platillo.descripcion
+
+= link_to 'Edit', edit_platillo_path(@platillo)
+\|
+= link_to 'Back', platillos_path
