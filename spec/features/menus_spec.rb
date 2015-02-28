@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Creacion de menu' do
+feature 'Gestión de menús' do
 
   background do
     crear_platillos
@@ -32,6 +32,31 @@ feature 'Creacion de menu' do
     expect(page).to have_content 'Platillo 2'
     expect(page).to have_content 'Platillo 3'
     expect(page).to have_content 'Platillo 4'
+  end
+
+  scenario 'agregar platillo a menu existente', js: true do
+    menu = FactoryGirl.create :menu, platillo_ids: Platillo.pluck(:id)
+
+    visit edit_menu_path menu
+    agregar_nuevo_platillo_a_menu
+    click_button 'Guardar menu'
+
+    expect(page).to have_content 'Platillo 1'
+    expect(page).to have_content 'Platillo 2'
+    expect(page).to have_content 'Platillo 3'
+    expect(page).to have_content 'Platillo 4'
+  end
+
+  scenario 'eliminar platillo de menu existente', js: true do
+    menu = FactoryGirl.create :menu, platillo_ids: Platillo.pluck(:id)
+
+    visit edit_menu_path menu
+    all('#platillos a.delete').last.click
+    click_button 'Guardar menu'
+
+    expect(page).to have_content 'Platillo 1'
+    expect(page).to have_content 'Platillo 2'
+    expect(page).not_to have_content 'Platillo 3'
   end
 
   def acceder_a_nuevo_menu

@@ -3,6 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 init = ->
+  $('#platillos a.delete').click (e) ->
+    e.preventDefault()
+    $(this).parent().remove()
+
   $('form#platillos_form').submit (e) ->
     e.preventDefault()
     id = $('#platillo_id :selected').val()

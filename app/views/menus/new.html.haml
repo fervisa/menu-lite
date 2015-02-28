@@ -2,14 +2,4 @@
 
 = render 'form'
 
-= form_tag :platillos, id: 'platillos_form' do
-  = collection_select :platillo, :id, Platillo.all, :id, :nombre
-  = button_tag 'Agregar'
-
-= simple_form_for Platillo.new, remote: true do |f|
-  = f.input :nombre
-  = f.input :tipo, collection: Platillo.tipos.keys
-  = f.input :descripcion
-  = f.button :submit, 'Crear y agregar'
-
 = link_to 'Back', menus_path
