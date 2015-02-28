@@ -30,6 +30,7 @@ class PlatillosController < ApplicationController
       if @platillo.save
         format.html { redirect_to @platillo, notice: 'Platillo was successfully created.' }
         format.json { render :show, status: :created, location: @platillo }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @platillo.errors, status: :unprocessable_entity }

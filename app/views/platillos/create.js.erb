@@ -1,0 +1,3 @@
+<% if @platillo.persisted? %>
+  $('#platillos').append('<%= j render @platillo %>');
+<% end %>
