@@ -1,14 +1,12 @@
-%h1 Listing platillos
+%h1 Platillos
 
-%table
+%table.table
   %thead
     %tr
       %th Nombre
       %th Tipo
-      %th Descripcion
-      %th
-      %th
-      %th
+      %th Descripción
+      %th Acciones
       
   %tbody
     - @platillos.each do |platillo|
@@ -16,10 +14,15 @@
         %td= platillo.nombre
         %td= platillo.tipo
         %td= platillo.descripcion
-        %td= link_to 'Show', platillo
-        %td= link_to 'Edit', edit_platillo_path(platillo)
-        %td= link_to 'Destroy', platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          .btn-group
+            = link_to 'Detalles', platillo, class: 'btn btn-default'
+            = link_to 'Modificar', edit_platillo_path(platillo), class: 'btn btn-primary'
+            = link_to 'Eliminar', platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
 
 %br
 
-= link_to 'New Platillo', new_platillo_path
+.pull-right
+  = link_to new_platillo_path, class: 'btn btn-lg btn-primary' do
+    %i.glyphicon.glyphicon-plus
+    Nuevo Platillo

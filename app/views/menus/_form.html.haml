@@ -10,6 +10,7 @@
 
   .form-actions
     = f.button :submit, 'Guardar menu'
+    = link_to 'Cancelar', menus_path, class: 'btn btn-danger'
 
 = form_tag :platillos, id: 'platillos_form' do
   = collection_select :platillo, :id, Platillo.all, :id, :nombre

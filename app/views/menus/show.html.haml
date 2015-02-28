@@ -13,7 +13,5 @@
     - @menu.platillos.each do |platillo|
       %li= platillo.nombre
 
-
-= link_to 'Edit', edit_menu_path(@menu)
-\|
-= link_to 'Back', menus_path
+= link_to 'Modificar', edit_menu_path(@menu), class: 'btn btn-default'
+= link_to 'Regresar', menus_path, class: 'btn btn-danger'

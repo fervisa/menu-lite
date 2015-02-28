@@ -11,4 +11,5 @@
   = f.input :descripcion
 
   .actions
-    = f.button :submit
+    = f.button :submit, 'Guardar platillo'
+    = link_to 'Cancelar', platillos_path, class: 'btn btn-danger'

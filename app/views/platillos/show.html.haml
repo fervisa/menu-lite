@@ -10,6 +10,5 @@
   %b Descripcion:
   = @platillo.descripcion
 
-= link_to 'Edit', edit_platillo_path(@platillo)
-\|
-= link_to 'Back', platillos_path
+= link_to 'Modificar', edit_platillo_path(@platillo), class: 'btn btn-default'
+= link_to 'Regresar', platillos_path, class: 'btn btn-danger'

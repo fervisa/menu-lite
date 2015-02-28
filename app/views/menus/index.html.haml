@@ -1,23 +1,26 @@
-%h1 Listing menus
+%h1 Menús
 
-%table
+%table.table
   %thead
     %tr
       %th Nombre
       %th Fecha
-      %th
-      %th
-      %th
+      %th Acciones
       
   %tbody
     - @menus.each do |menu|
       %tr
         %td= menu.nombre
         %td= menu.fecha
-        %td= link_to 'Show', menu
-        %td= link_to 'Edit', edit_menu_path(menu)
-        %td= link_to 'Destroy', menu, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          .btn-group
+            = link_to 'Detalles', menu, class: 'btn btn-default'
+            = link_to 'Modificar', edit_menu_path(menu), class: 'btn btn-primary'
+            = link_to 'Eliminar', menu, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
 
 %br
 
-= link_to 'Nuevo Menu', new_menu_path
+.pull-right
+  = link_to new_menu_path, class: 'btn btn-lg btn-primary' do
+    %i.glyphicon.glyphicon-plus
+    Nuevo Menu
