@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225170509) do
+ActiveRecord::Schema.define(version: 20150228011343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "nombre"
+    t.date     "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus_platillos", id: false, force: :cascade do |t|
+    t.integer "menu_id"
+    t.integer "platillo_id"
+  end
+
+  add_index "menus_platillos", ["menu_id"], name: "index_menus_platillos_on_menu_id", using: :btree
+  add_index "menus_platillos", ["platillo_id"], name: "index_menus_platillos_on_platillo_id", using: :btree
 
   create_table "platillos", force: :cascade do |t|
     t.string   "nombre"
