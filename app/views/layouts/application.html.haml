@@ -7,4 +7,27 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-default.navbar-static-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} Menus-lite
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li{ class: controller_name == 'menus' ? 'active' : '' }
+              = link_to 'Menús', menus_path
+            %li{ class: controller_name == 'platillos' ? 'active' : '' }
+              = link_to 'Platillos', platillos_path
+    .container
+      .row
+        .span12
+          = yield
+
+      %hr
+    
+      %footer
+        %p &copy; Menus-lite 2015
