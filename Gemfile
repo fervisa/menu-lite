@@ -53,6 +53,7 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
+  gem 'launchy'
   gem 'pry'
 end
 
