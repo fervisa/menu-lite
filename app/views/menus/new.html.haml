@@ -2,4 +2,8 @@
 
 = render 'form'
 
+= form_tag :platillos, id: 'platillos_form' do
+  = collection_select :platillo, :id, Platillo.all, :id, :nombre
+  = button_tag 'Agregar'
+
 = link_to 'Back', menus_path

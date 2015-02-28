@@ -7,6 +7,13 @@
   %b Fecha:
   = @menu.fecha
 
+%p
+  %b Platillos
+  %ul
+    - @menu.platillos.each do |platillo|
+      %li= platillo.nombre
+
+
 = link_to 'Edit', edit_menu_path(@menu)
 \|
 = link_to 'Back', menus_path
