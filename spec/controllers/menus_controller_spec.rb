@@ -24,17 +24,19 @@ RSpec.describe MenusController, type: :controller do
   # Menu. As you add validations to Menu, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { nombre: 'Menu 1', fecha: Date.today }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { nombre: 'Menu 1', fecha: '' }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # MenusController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  let(:platillos) { FactoryGirl.create_list :platillo, 2 }
 
   describe "GET #index" do
     it "assigns all menus as @menus" do
@@ -81,6 +83,13 @@ RSpec.describe MenusController, type: :controller do
         expect(assigns(:menu)).to be_persisted
       end
 
+      it "associates platillos to menu" do
+        platillos_ids = platillos.map &:id
+        valid_attributes.merge!({ platillo_ids: platillos_ids })
+        post :create, {:menu => valid_attributes}, valid_session
+        expect(assigns(:menu).platillos.length).to eq 2
+      end
+
       it "redirects to the created menu" do
         post :create, {:menu => valid_attributes}, valid_session
         expect(response).to redirect_to(Menu.last)
@@ -103,14 +112,14 @@ RSpec.describe MenusController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { nombre: 'Menu 2', fecha: Date.today }
       }
 
       it "updates the requested menu" do
         menu = Menu.create! valid_attributes
         put :update, {:id => menu.to_param, :menu => new_attributes}, valid_session
         menu.reload
-        skip("Add assertions for updated state")
+        expect(menu.nombre).to eq 'Menu 2'
       end
 
       it "assigns the requested menu as @menu" do
