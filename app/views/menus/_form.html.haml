@@ -23,9 +23,10 @@
               Buscar platillo
         #search-platillo.panel-collapse.collapse.in{ role: 'tabpanel' }
           .panel-body
-            = form_tag :platillos, id: 'platillos_form' do
-              = collection_select :platillo, :id, Platillo.all, :id, :nombre
-              = button_tag 'Agregar'
+            = form_tag add_platillo_path, id: 'platillos_form', class: 'form-inline', method: :get, remote:true do
+              .form-group
+                = select_tag :id, options_from_collection_for_select(Platillo.all, :id, :nombre), class: 'form-control'
+              = button_tag 'Agregar', class: 'btn btn-default'
 
       .panel.panel-default
         .panel-heading{ role: 'tab' }

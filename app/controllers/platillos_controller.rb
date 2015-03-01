@@ -1,5 +1,5 @@
 class PlatillosController < ApplicationController
-  before_action :set_platillo, only: [:show, :edit, :update, :destroy]
+  before_action :set_platillo, only: [:show, :edit, :update, :destroy, :add]
 
   # GET /platillos
   # GET /platillos.json
@@ -10,6 +10,12 @@ class PlatillosController < ApplicationController
   # GET /platillos/1
   # GET /platillos/1.json
   def show
+  end
+
+  def add
+    respond_to do |format|
+      format.js { render 'create' }
+    end
   end
 
   # GET /platillos/new

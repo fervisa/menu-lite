@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :menus
 
+  match 'platillos/add' => 'platillos#add', as: :add_platillo, via: :get
+
   resources :platillos
 
   # The priority is based upon order of creation: first created -> highest priority.

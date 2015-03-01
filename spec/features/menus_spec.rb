@@ -80,10 +80,12 @@ feature 'Gestión de menús' do
   end
 
   def agregar_platillos_a_menu
-    select 'Platillo 2', from: 'platillo_id'
-    click_button 'Agregar'
-    select 'Platillo 3', from: 'platillo_id'
-    click_button 'Agregar'
+    within '#platillos_form' do 
+      select 'Platillo 2', from: 'id'
+      click_button 'Agregar'
+      select 'Platillo 3', from: 'id'
+      click_button 'Agregar'
+    end
   end
 
   def agregar_nuevo_platillo_a_menu
