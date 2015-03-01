@@ -23,8 +23,8 @@ feature 'Gestión de menús' do
     expect{
       acceder_a_nuevo_menu
       rellenar_formulario_menu
-      agregar_nuevo_platillo_a_menu
       agregar_platillos_a_menu
+      agregar_nuevo_platillo_a_menu
       click_button 'Guardar menu'
     }.to change{ Menu.count }.by 1
 
@@ -87,6 +87,7 @@ feature 'Gestión de menús' do
   end
 
   def agregar_nuevo_platillo_a_menu
+    find('a[href="#new-platillo"]').click
     within '#new_platillo' do
       fill_in 'Nombre', with: 'Platillo 4'
       select 'plato fuerte', from: 'Tipo'

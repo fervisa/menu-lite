@@ -1,4 +1,6 @@
-%div
+%li.list-group-item
+  = link_to platillo, class: 'delete pull-right text-danger' do
+    %i.glyphicon.glyphicon-remove
+  %h4= platillo.nombre
+  %p= platillo.descripcion
   = hidden_field_tag 'menu[platillo_ids][]', platillo.id
-  = platillo.nombre
-  = link_to 'X', platillo, class: 'delete'

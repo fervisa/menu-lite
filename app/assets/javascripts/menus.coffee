@@ -20,10 +20,12 @@ bindDeletePlatillo = (scope=$(document)) ->
     $(this).parent().remove()
 
 createPlatilloRow = (id, nombre) ->
-  $('<div></div>').html("
+  $('<li class="list-group-item"></li>').html("
+    <a href='#' class='delete pull-right text-danger'>
+      <i class='glyphicon glyphicon-remove'></i>
+    </a>
     <input type='hidden' value='#{ id }' name='menu[platillo_ids][]' multiple />
-    #{ nombre }
-    <a href='#' class='delete'>X</a>
+    <h4>#{ nombre }</h4>
   ")
 
 $(document).on 'ready page:load', init

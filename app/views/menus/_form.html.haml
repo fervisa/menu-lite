@@ -1,23 +1,41 @@
-= simple_form_for(@menu) do |f|
-  = f.error_notification
+.row
+  .col-md-8
+    = simple_form_for(@menu) do |f|
+      = f.error_notification
 
-  .form-inputs
-    = f.input :nombre
-    = f.input :fecha
+      .form-inputs
+        = f.input :nombre
+        = f.input :fecha
 
-    #platillos
-      = render @menu.platillos
+        %ul#platillos
+          = render @menu.platillos
 
-  .form-actions
-    = f.button :submit, 'Guardar menu'
-    = link_to 'Cancelar', menus_path, class: 'btn btn-danger'
+      .form-actions.pull-right
+        = f.button :submit, 'Guardar menu'
+        = link_to 'Cancelar', menus_path, class: 'btn btn-danger'
 
-= form_tag :platillos, id: 'platillos_form' do
-  = collection_select :platillo, :id, Platillo.all, :id, :nombre
-  = button_tag 'Agregar'
+  .col-md-4
+    .panel-group#accordion-platillos{ role: 'tablist' }
+      .panel.panel-default
+        .panel-heading{ role: 'tab' }
+          %h4.panel-title
+            %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'href' => '#search-platillo', 'data-parent' => '#accordion-platillos' }
+              Buscar platillo
+        #search-platillo.panel-collapse.collapse.in{ role: 'tabpanel' }
+          .panel-body
+            = form_tag :platillos, id: 'platillos_form' do
+              = collection_select :platillo, :id, Platillo.all, :id, :nombre
+              = button_tag 'Agregar'
 
-= simple_form_for Platillo.new, remote: true do |f|
-  = f.input :nombre
-  = f.input :tipo, collection: Platillo.tipos.keys
-  = f.input :descripcion
-  = f.button :submit, 'Crear y agregar'
+      .panel.panel-default
+        .panel-heading{ role: 'tab' }
+          %h4.panel-title
+            %a.collapsed{ 'data-toggle' => 'collapse', 'aria-expanded' => 'false', 'href' => '#new-platillo', 'data-target' => '#new-platillo', 'data-parent' => '#accordion-platillos', 'aria-controls' => 'new-platillo' }
+              Nuevo platillo
+        #new-platillo.panel-collapse.collapse{ role: 'tabpanel' }
+          .panel-body
+            = simple_form_for Platillo.new, remote: true do |f|
+              = f.input :nombre
+              = f.input :tipo, collection: Platillo.tipos.keys
+              = f.input :descripcion
+              = f.button :submit, 'Crear y agregar'
