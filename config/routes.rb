@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'ingresar', to: 'sesiones#new', as: :login
+  post 'ingresar', to: 'sesiones#create'
+  delete 'ingresar', to: 'sesiones#destroy', as: :logout
+
   resources :menus
 
   match 'platillos/add' => 'platillos#add', as: :add_platillo, via: :get
