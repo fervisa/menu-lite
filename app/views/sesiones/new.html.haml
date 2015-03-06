@@ -1,2 +1,10 @@
-%h1 Sesiones#new
-%p Find me in app/views/sesiones/new.html.haml
+%h1.text-center
+  %i.glyphicon.glyphicon-cutlery
+
+= form_tag login_path, method: :post, id: 'login-form' do
+  .form-group
+    = text_field_tag :email, params[:email], autofocus: true, placeholder: 'Email', class: 'form-control'
+  .form-group
+    = password_field_tag :password, '', placeholder: 'Contraseña', class: 'form-control'
+
+  = submit_tag 'Iniciar Sesión', class: 'btn btn-lg btn-primary btn-block'

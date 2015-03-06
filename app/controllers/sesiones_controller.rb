@@ -1,14 +1,16 @@
 class SesionesController < ApplicationController
+  layout 'login'
+
   def new
-    @usuario = Usuario.new
   end
 
   def create
-    @usuario = Usuario.find_by_email params[:email]
-    if @usuario && @usuario.authenticate(params[:password])
-      session[:usuario_id] = @usuario.id
+    usuario = Usuario.find_by_email params[:email]
+    if usuario && usuario.authenticate(params[:password])
+      session[:usuario_id] = usuario.id
       redirect_to menus_path
     else
+      flash[:alert] = 'Nombre de usuario o contraseña no válidos'
       render 'new'
     end
   end
