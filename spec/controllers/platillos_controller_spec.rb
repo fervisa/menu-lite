@@ -36,6 +36,12 @@ RSpec.describe PlatillosController, type: :controller do
   # PlatillosController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:usuario) { FactoryGirl.create :usuario, email: 'usuario@mail.com', password: 'hola', password_confirmation: 'hola' }
+
+  before :each do
+    allow(controller).to receive(:current_usuario).and_return usuario
+  end
+
   describe "GET #index" do
     it "assigns all platillos as @platillos" do
       platillo = Platillo.create! valid_attributes

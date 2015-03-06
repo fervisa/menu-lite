@@ -1,4 +1,5 @@
 class PlatillosController < ApplicationController
+  before_action :authenticate!
   before_action :set_platillo, only: [:show, :edit, :update, :destroy, :add]
 
   # GET /platillos

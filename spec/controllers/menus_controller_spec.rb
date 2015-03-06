@@ -36,7 +36,12 @@ RSpec.describe MenusController, type: :controller do
   # MenusController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:usuario) { FactoryGirl.create :usuario, email: 'usuario@mail.com', password: 'hola', password_confirmation: 'hola' }
   let(:platillos) { FactoryGirl.create_list :platillo, 2 }
+
+  before :each do
+    allow(controller).to receive(:current_usuario).and_return usuario
+  end
 
   describe "GET #index" do
     it "assigns all menus as @menus" do

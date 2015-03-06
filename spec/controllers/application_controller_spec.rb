@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
   controller do
-    before_filter :authenticate!
+    before_action :authenticate!
 
     def index
       render nothing: true
