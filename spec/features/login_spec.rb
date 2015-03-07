@@ -7,19 +7,14 @@ feature 'Inicio de sesión' do
   end
 
   scenario 'inicio de sesión exitoso', js: true do
-    visit login_path
-    fill_in 'email', with: 'usuario@mail.com'
-    fill_in 'password', with: 'abc123'
-    click_button 'Iniciar Sesión'
+    iniciar_sesion 'usuario@mail.com', 'abc123'
     expect(current_path).to match 'menus'
     expect(page).to have_content 'Menús'
+    expect(page).to have_content 'Has iniciado sesión correctamente'
   end
 
   scenario 'inicio de sesión fallido', js: true do
-    visit login_path
-    fill_in 'email', with: 'usuario@mail.com'
-    fill_in 'password', with: 'xabc123'
-    click_button 'Iniciar Sesión'
+    iniciar_sesion 'usuario@mail.com', 'xabc123'
     expect(current_path).to match 'ingresar'
     expect(page).to have_content 'Nombre de usuario o contraseña no válidos'
   end

@@ -8,7 +8,7 @@ class SesionesController < ApplicationController
     usuario = Usuario.find_by_email params[:email]
     if usuario && usuario.authenticate(params[:password])
       session[:usuario_id] = usuario.id
-      redirect_to menus_path
+      redirect_to menus_path, alert: 'Has iniciado sesión correctamente'
     else
       flash[:error] = 'Nombre de usuario o contraseña no válidos'
       render 'new'
