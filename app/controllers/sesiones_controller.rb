@@ -10,7 +10,7 @@ class SesionesController < ApplicationController
       session[:usuario_id] = usuario.id
       redirect_to menus_path
     else
-      flash[:alert] = 'Nombre de usuario o contraseña no válidos'
+      flash[:error] = 'Nombre de usuario o contraseña no válidos'
       render 'new'
     end
   end

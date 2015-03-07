@@ -7,5 +7,8 @@
     = csrf_meta_tags
   %body#sesion
     .container
-      = flash[:alert]
+      .row
+        .col-md-6.col-md-offset-3
+          = flash_messages
+
       = yield
