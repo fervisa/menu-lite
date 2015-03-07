@@ -4,6 +4,8 @@ feature 'Gestión de menús' do
 
   background do
     crear_platillos
+    usuario = FactoryGirl.create :usuario, email: 'usuario@mail.com', password: 'abc123', password_confirmation: 'abc123'
+    iniciar_sesion usuario, 'abc123'
   end
 
   scenario 'menu de platillos existentes', js: true do
@@ -95,5 +97,12 @@ feature 'Gestión de menús' do
       select 'plato fuerte', from: 'Tipo'
       click_button 'Crear y agregar'
     end
+  end
+
+  def iniciar_sesion usuario, password
+    visit login_path
+    fill_in 'email', with: usuario.email
+    fill_in 'password', with: password
+    click_button 'Iniciar Sesión'
   end
 end
