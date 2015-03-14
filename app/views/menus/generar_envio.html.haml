@@ -1,8 +1,15 @@
+%h2 
+  %i.glyphicon.glyphicon-envelope
+  &nbsp;
+  Enviar menús
+
+%hr
+
 = simple_form_for @envio, url: enviar_menus_path, method: :post do |f|
   = f.input :desde
   = f.input :hasta
   = f.input :email
 
-  = f.button :submit, 'Enviar menús'
+  #menus.row
 
-%ul#menus
+  = f.button :submit, 'Enviar menús'

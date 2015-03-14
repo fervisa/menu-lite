@@ -1,4 +1,11 @@
-%li
-  - @menus.each do |menu|
-    - menu.platillos.each do |platillo|
-      = platillo.nombre      
+.col-md-3
+  .panel.panel-default
+    .panel-heading
+      = l menu.fecha, format: :with_dayname
+    .panel-body.list-group
+      - menu.platillos.each do |platillo|
+        %a.list-group-item{ href: true }
+          %h4.list-group-item-heading
+            = platillo.nombre      
+          %p.list-group-item-text
+            = platillo.descripcion

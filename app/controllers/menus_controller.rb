@@ -7,7 +7,7 @@ class MenusController < ApplicationController
   def index
     menus = Menu
     menus = menus.where(fecha: params[:desde].to_date..params[:hasta].to_date) unless params[:desde].blank? || params[:hasta].blank?
-    @menus = menus.all
+    @menus = menus.order('fecha ASC').all
   end
 
   # GET /menus/1

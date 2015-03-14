@@ -111,7 +111,7 @@ feature 'Envío de menús' do
     fill_in 'envio_desde', with: '01-02-2015'
     fill_in 'envio_hasta', with: '04-02-2015'
     fill_in 'envio_email', with: 'maestra@escuelita.com'
-    within 'ul#menus' do
+    within '#menus' do
       expect(page).to have_content 'Platillo 1'
       expect(page).to have_content 'Platillo 2'
       expect(page).not_to have_content 'Platillo 3'
