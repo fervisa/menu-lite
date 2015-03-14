@@ -44,10 +44,24 @@ RSpec.describe MenusController, type: :controller do
   end
 
   describe "GET #index" do
+    before :each do
+      @menu_1 = Menu.create! valid_attributes
+      @menu_2 = Menu.create! valid_attributes.merge({ fecha: Date.today + 10.days })
+    end
+
     it "assigns all menus as @menus" do
-      menu = Menu.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:menus)).to eq([menu])
+      expect(assigns(:menus)).to match([@menu_1, @menu_2])
+    end
+
+    it "ignores filters if both dates aren't set" do
+      get :index, desde: Date.today, hasta: ''
+      expect(assigns(:menus)).to eq([@menu_1, @menu_2])
+    end
+
+    it "filters menus by date" do
+      get :index, desde: Date.today, hasta: (Date.today + 5.days)
+      expect(assigns(:menus)).to eq([@menu_1])
     end
   end
 
@@ -167,6 +181,38 @@ RSpec.describe MenusController, type: :controller do
       menu = Menu.create! valid_attributes
       delete :destroy, {:id => menu.to_param}, valid_session
       expect(response).to redirect_to(menus_url)
+    end
+  end
+
+  describe 'POST enviar' do
+    before :each do
+      @menu_1 = Menu.create! valid_attributes
+      @menu_2 = Menu.create! valid_attributes.merge({ fecha: Date.today + 10.days })
+    end
+
+    context 'success' do
+      it 'redirects to menus index' do
+        post :enviar, envio: { desde: Date.today, hasta: (Date.today + 5.days), email: 'maestra@escuelita.com' }
+        expect(response).to redirect_to menus_path
+      end
+
+      it 'shows a success message' do
+        post :enviar, envio: { desde: Date.today, hasta: (Date.today + 5.days), email: 'maestra@escuelita.com' }
+        expect(flash[:notice]).to match /Los menús han sido enviados exitosamente/
+      end
+
+      it 'delivers an email' do
+        expect{
+          post :enviar, envio: { desde: Date.today, hasta: (Date.today + 5.days), email: 'maestra@escuelita.com' }
+        }.to change{ ActionMailer::Base.deliveries.count }.by 1
+      end
+    end
+
+    context 'error' do
+      it 'renders generar_envio template' do
+        post :enviar, envio: { desde: Date.today, hasta: (Date.today + 5.days) }
+        expect(response).to render_template 'generar_envio'
+      end
     end
   end
 

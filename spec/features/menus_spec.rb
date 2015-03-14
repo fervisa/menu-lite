@@ -98,3 +98,35 @@ feature 'Gestión de menús' do
     end
   end
 end
+
+feature 'Envío de menús' do
+  background do
+    crear_menus
+    usuario = FactoryGirl.create :usuario, email: 'usuario@mail.com', password: 'abc123', password_confirmation: 'abc123'
+    iniciar_sesion usuario.email, 'abc123'
+  end
+
+  scenario 'envío de menús por rango de fechas', js: true do
+    click_link 'Enviar menús'
+    fill_in 'envio_desde', with: '01-02-2015'
+    fill_in 'envio_hasta', with: '04-02-2015'
+    fill_in 'envio_email', with: 'maestra@escuelita.com'
+    within 'ul#menus' do
+      expect(page).to have_content 'Platillo 1'
+      expect(page).to have_content 'Platillo 2'
+      expect(page).not_to have_content 'Platillo 3'
+    end
+    click_button 'Enviar menús'
+    expect(page).to have_content 'Los menús han sido enviados exitosamente al correo maestra@escuelita.com'
+  end
+
+  def crear_menus
+    platillo_1 = FactoryGirl.create :platillo, nombre: 'Platillo 1'
+    platillo_2 = FactoryGirl.create :platillo, nombre: 'Platillo 2'
+    platillo_3 = FactoryGirl.create :platillo, nombre: 'Platillo 3'
+
+    FactoryGirl.create :menu, platillo_ids: [platillo_1.id], fecha: Date.parse('01-02-2015')
+    FactoryGirl.create :menu, platillo_ids: [platillo_2.id], fecha: Date.parse('04-02-2015')
+    FactoryGirl.create :menu, platillo_ids: [platillo_3.id], fecha: Date.parse('08-02-2015')
+  end
+end

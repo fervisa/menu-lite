@@ -5,7 +5,9 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
-    @menus = Menu.all
+    menus = Menu
+    menus = menus.where(fecha: params[:desde].to_date..params[:hasta].to_date) unless params[:desde].blank? || params[:hasta].blank?
+    @menus = menus.all
   end
 
   # GET /menus/1
@@ -59,6 +61,20 @@ class MenusController < ApplicationController
     respond_to do |format|
       format.html { redirect_to menus_url, notice: 'Menu was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def generar_envio
+    @envio = Envio.new
+  end
+
+  def enviar
+    @envio = Envio.new params[:envio]
+    if @envio.valid?
+      MenusMailer.enviar(@envio).deliver_now
+      redirect_to menus_path, notice: "Los menús han sido enviados exitosamente al correo #{ @envio.email }"
+    else
+      render :generar_envio
     end
   end
 

@@ -1,0 +1,11 @@
+%p
+  Buen día, hacemos llegar los menús del #{ l @envio.desde.to_date, format: :long } al #{ l @envio.hasta.to_date, format: :long }:
+
+- @menus.each do |menu|
+  %p
+    = menu.fecha
+    %ul
+      - menu.platillos.each do |pĺatillo|
+        %li
+          = pĺatillo.nombre
+          = pĺatillo.descripcion

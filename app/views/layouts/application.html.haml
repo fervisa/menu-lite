@@ -22,6 +22,8 @@
               = link_to 'Menús', menus_path
             %li{ class: controller_name == 'platillos' ? 'active' : '' }
               = link_to 'Platillos', platillos_path
+            %li
+              = link_to 'Enviar menús', generar_envio_menus_path
     .container
       .row
         .span12

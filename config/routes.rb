@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   post 'ingresar', to: 'sesiones#create'
   delete 'ingresar', to: 'sesiones#destroy', as: :logout
 
-  resources :menus
+  resources :menus do
+    get :generar_envio, on: :collection
+    post :enviar, on: :collection
+  end
 
   match 'platillos/add' => 'platillos#add', as: :add_platillo, via: :get
 
