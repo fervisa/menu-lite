@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+  date:
+    formats:
+      with_dayname: "%A %d %B"
