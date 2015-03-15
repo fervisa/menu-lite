@@ -62,7 +62,7 @@ feature 'Gestión de menús' do
   end
 
   def acceder_a_nuevo_menu
-    click_link 'Nuevo Menu'
+    click_link 'Nuevo Menú'
   end
 
   def crear_platillos
@@ -74,9 +74,7 @@ feature 'Gestión de menús' do
   def rellenar_formulario_menu
     within '#new_menu' do
       fill_in 'Nombre', with: 'Menu 1'
-      select '2015', from: 'menu_fecha_1i'
-      select 'February', from: 'menu_fecha_2i'
-      select '2', from: 'menu_fecha_3i'
+      fill_in 'Fecha', with: '2015-02-16'
     end
   end
 
@@ -108,8 +106,8 @@ feature 'Envío de menús' do
 
   scenario 'envío de menús por rango de fechas', js: true do
     click_link 'Enviar menús'
-    fill_in 'envio_desde', with: '01-02-2015'
-    fill_in 'envio_hasta', with: '04-02-2015'
+    fill_in 'envio_desde', with: '2015-02-01'
+    fill_in 'envio_hasta', with: '2015-02-04'
     fill_in 'envio_email', with: 'maestra@escuelita.com'
     within '#menus' do
       expect(page).to have_content 'Platillo 1'
@@ -125,8 +123,8 @@ feature 'Envío de menús' do
     platillo_2 = FactoryGirl.create :platillo, nombre: 'Platillo 2'
     platillo_3 = FactoryGirl.create :platillo, nombre: 'Platillo 3'
 
-    FactoryGirl.create :menu, platillo_ids: [platillo_1.id], fecha: Date.parse('01-02-2015')
-    FactoryGirl.create :menu, platillo_ids: [platillo_2.id], fecha: Date.parse('04-02-2015')
-    FactoryGirl.create :menu, platillo_ids: [platillo_3.id], fecha: Date.parse('08-02-2015')
+    FactoryGirl.create :menu, platillo_ids: [platillo_1.id], fecha: Date.parse('2015-02-01')
+    FactoryGirl.create :menu, platillo_ids: [platillo_2.id], fecha: Date.parse('2015-02-04')
+    FactoryGirl.create :menu, platillo_ids: [platillo_3.id], fecha: Date.parse('2015-02-08')
   end
 end

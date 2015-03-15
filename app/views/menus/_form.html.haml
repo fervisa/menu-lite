@@ -5,7 +5,7 @@
 
       .form-inputs
         = f.input :nombre
-        = f.input :fecha
+        = f.input :fecha, as: :datepicker
 
         %ul#platillos
           = render @menu.platillos

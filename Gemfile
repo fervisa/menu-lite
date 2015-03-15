@@ -35,6 +35,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-fullcalendar'
+  gem 'rails-assets-bootstrap-datepicker'
 end
 
 # Use Unicorn as the app server
