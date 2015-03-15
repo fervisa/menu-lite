@@ -5,6 +5,7 @@
 init = ->
   bindDeletePlatillo($('#platillos'))
   bindSearchMenu() if $('form#new_envio').length
+  loadMenusCalendar() if $('#menus-calendar').length
 
 bindDeletePlatillo = (scope=$(document)) ->
   scope.find('a.delete').click (e) ->
@@ -19,6 +20,11 @@ bindSearchMenu = ->
     params = $.param({ desde: desde, hasta: hasta })
     $.getScript "/menus?#{ params }"
 
+loadMenusCalendar = ->
+  $('#menus-calendar').fullCalendar
+    events: '/menus.json'
+    startParam: 'desde'
+    endParam: 'hasta'
 
 $(document).on 'ready page:load', init
 window.bindDeletePlatillo = bindDeletePlatillo

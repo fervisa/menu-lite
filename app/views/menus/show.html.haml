@@ -13,5 +13,14 @@
     - @menu.platillos.each do |platillo|
       %li= platillo.nombre
 
-= link_to 'Modificar', edit_menu_path(@menu), class: 'btn btn-default'
-= link_to 'Regresar', menus_path, class: 'btn btn-danger'
+= link_to edit_menu_path(@menu), class: 'btn btn-primary' do
+  %i.glyphicon.glyphicon-pencil
+  Modificar
+
+= link_to menus_path, class: 'btn btn-default' do
+  %i.glyphicon.glyphicon-chevron-left
+  Regresar
+
+= link_to @menu, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' do
+  %i.glyphicon.glyphicon-trash
+  Eliminar

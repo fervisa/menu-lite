@@ -46,22 +46,22 @@ RSpec.describe MenusController, type: :controller do
   describe "GET #index" do
     before :each do
       @menu_1 = Menu.create! valid_attributes
-      @menu_2 = Menu.create! valid_attributes.merge({ fecha: Date.today + 10.days })
+      @menu_2 = Menu.create! valid_attributes.merge({ fecha: Date.today - 1.months })
     end
 
-    it "assigns all menus as @menus" do
+    it "assigns current month menus as @menus" do
       get :index, {}, valid_session
-      expect(assigns(:menus)).to match([@menu_1, @menu_2])
+      expect(assigns(:menus)).to match([@menu_1])
     end
 
     it "ignores filters if both dates aren't set" do
       get :index, desde: Date.today, hasta: ''
-      expect(assigns(:menus)).to eq([@menu_1, @menu_2])
+      expect(assigns(:menus)).to eq([@menu_1])
     end
 
     it "filters menus by date" do
-      get :index, desde: Date.today, hasta: (Date.today + 5.days)
-      expect(assigns(:menus)).to eq([@menu_1])
+      get :index, desde: (Date.today - 1.months), hasta: Date.today
+      expect(assigns(:menus)).to eq([@menu_2, @menu_1])
     end
   end
 

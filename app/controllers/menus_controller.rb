@@ -5,9 +5,9 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
-    menus = Menu
-    menus = menus.where(fecha: params[:desde].to_date..params[:hasta].to_date) unless params[:desde].blank? || params[:hasta].blank?
-    @menus = menus.order('fecha ASC').all
+    fecha_inicio = params[:desde].blank? ? Date.today.beginning_of_month : params[:desde].to_date
+    fecha_fin = params[:hasta].blank? ? Date.today.end_of_month : params[:hasta].to_date
+    @menus = Menu.where(fecha: fecha_inicio..fecha_fin).order('fecha ASC')
   end
 
   # GET /menus/1

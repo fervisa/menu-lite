@@ -1,26 +1,10 @@
-%h1 Menús
-
-%table.table
-  %thead
-    %tr
-      %th Nombre
-      %th Fecha
-      %th Acciones
-      
-  %tbody
-    - @menus.each do |menu|
-      %tr
-        %td= menu.nombre
-        %td= menu.fecha
-        %td
-          .btn-group
-            = link_to 'Detalles', menu, class: 'btn btn-default'
-            = link_to 'Modificar', edit_menu_path(menu), class: 'btn btn-primary'
-            = link_to 'Eliminar', menu, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
-
-%br
-
 .pull-right
   = link_to new_menu_path, class: 'btn btn-lg btn-primary' do
     %i.glyphicon.glyphicon-plus
-    Nuevo Menu
+    Nuevo Menú
+
+%h1 Menús
+
+%hr
+
+#menus-calendar
