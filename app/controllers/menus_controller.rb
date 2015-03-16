@@ -71,7 +71,7 @@ class MenusController < ApplicationController
   def enviar
     @envio = Envio.new params[:envio]
     if @envio.valid?
-      MenusMailer.enviar(@envio).deliver_now
+      MenusMailer.enviar(@envio, current_usuario).deliver_now
       redirect_to menus_path, notice: "Los menús han sido enviados exitosamente al correo #{ @envio.email }"
     else
       render :generar_envio

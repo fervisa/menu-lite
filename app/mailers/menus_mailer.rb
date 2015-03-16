@@ -6,9 +6,9 @@ class MenusMailer < ApplicationMailer
   #
   #   en.menus_mailer.enviar.subject
   #
-  def enviar envio
+  def enviar envio, usuario
     @envio = envio
     @menus = Menu.where(fecha: envio.desde.to_date..envio.hasta.to_date).order('fecha ASC')
-    mail to: envio.email, subject: 'Envío de menús'
+    mail to: envio.email, bcc: usuario.email, from: usuario.email, subject: 'Envío de menús'
   end
 end

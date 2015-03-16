@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe MenusMailer, type: :mailer do
   let(:envio) { Envio.new desde: '01-02-2015', hasta: '04-02-2015', email: 'maestra@escuelita.com' }
+  let(:usuario) { FactoryGirl.create :usuario }
 
   before :each do
     platillo_1 = FactoryGirl.create :platillo, nombre: 'Platillo 1'
@@ -14,11 +15,13 @@ RSpec.describe MenusMailer, type: :mailer do
   end
 
   describe "enviar" do
-    let(:mail) { MenusMailer.enviar(envio) }
+    let(:mail) { MenusMailer.enviar(envio, usuario) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Envío de menús")
       expect(mail.to).to eq([envio.email])
+      expect(mail.from).to eq([usuario.email])
+      expect(mail.bcc).to eq([usuario.email])
     end
 
     it "renders the body" do
