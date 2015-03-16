@@ -87,9 +87,9 @@ RSpec.describe PlatillosController, type: :controller do
         expect(assigns(:platillo)).to be_persisted
       end
 
-      it "redirects to the created platillo" do
+      it "redirects to platillos index" do
         post :create, {:platillo => valid_attributes}, valid_session
-        expect(response).to redirect_to(Platillo.last)
+        expect(response).to redirect_to(platillos_path)
       end
     end
 
@@ -125,10 +125,10 @@ RSpec.describe PlatillosController, type: :controller do
         expect(assigns(:platillo)).to eq(platillo)
       end
 
-      it "redirects to the platillo" do
+      it "redirects to platillos index" do
         platillo = Platillo.create! valid_attributes
         put :update, {:id => platillo.to_param, :platillo => valid_attributes}, valid_session
-        expect(response).to redirect_to(platillo)
+        expect(response).to redirect_to(platillos_path)
       end
     end
 

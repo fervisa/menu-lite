@@ -109,9 +109,9 @@ RSpec.describe MenusController, type: :controller do
         expect(assigns(:menu).platillos.length).to eq 2
       end
 
-      it "redirects to the created menu" do
+      it "redirects to menus index" do
         post :create, {:menu => valid_attributes}, valid_session
-        expect(response).to redirect_to(Menu.last)
+        expect(response).to redirect_to(menus_path)
       end
     end
 
@@ -147,10 +147,10 @@ RSpec.describe MenusController, type: :controller do
         expect(assigns(:menu)).to eq(menu)
       end
 
-      it "redirects to the menu" do
+      it "redirects to menus index" do
         menu = Menu.create! valid_attributes
         put :update, {:id => menu.to_param, :menu => valid_attributes}, valid_session
-        expect(response).to redirect_to(menu)
+        expect(response).to redirect_to(menus_path)
       end
     end
 

@@ -16,6 +16,9 @@ feature 'Gestión de menús' do
       click_button 'Guardar menu'
     }.to change{ Menu.count }.by 1
 
+    expect(page).to have_content 'Menu 1'
+
+    click_link 'Menu 1'
     expect(page).not_to have_content 'Platillo 1'
     expect(page).to have_content 'Platillo 2'
     expect(page).to have_content 'Platillo 3'
@@ -30,6 +33,10 @@ feature 'Gestión de menús' do
       click_button 'Guardar menu'
     }.to change{ Menu.count }.by 1
 
+    expect(page).to have_content 'Menu 1'
+
+    click_link 'Menu 1'
+
     expect(page).not_to have_content 'Platillo 1'
     expect(page).to have_content 'Platillo 2'
     expect(page).to have_content 'Platillo 3'
@@ -43,6 +50,10 @@ feature 'Gestión de menús' do
     agregar_nuevo_platillo_a_menu
     click_button 'Guardar menu'
 
+    expect(page).to have_content menu.nombre
+
+    click_link menu.nombre
+
     expect(page).to have_content 'Platillo 1'
     expect(page).to have_content 'Platillo 2'
     expect(page).to have_content 'Platillo 3'
@@ -55,6 +66,10 @@ feature 'Gestión de menús' do
     visit edit_menu_path menu
     all('#platillos a.delete').last.click
     click_button 'Guardar menu'
+
+    expect(page).to have_content menu.nombre
+
+    click_link menu.nombre
 
     expect(page).to have_content 'Platillo 1'
     expect(page).to have_content 'Platillo 2'
@@ -74,7 +89,7 @@ feature 'Gestión de menús' do
   def rellenar_formulario_menu
     within '#new_menu' do
       fill_in 'Nombre', with: 'Menu 1'
-      fill_in 'Fecha', with: '2015-02-16'
+      fill_in 'Fecha', with: Date.today.to_s
     end
   end
 

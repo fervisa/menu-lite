@@ -35,7 +35,7 @@ class PlatillosController < ApplicationController
 
     respond_to do |format|
       if @platillo.save
-        format.html { redirect_to @platillo, notice: 'Platillo was successfully created.' }
+        format.html { redirect_to platillos_path, notice: 'Platillo was successfully created.' }
         format.json { render :show, status: :created, location: @platillo }
         format.js
       else
@@ -50,7 +50,7 @@ class PlatillosController < ApplicationController
   def update
     respond_to do |format|
       if @platillo.update(platillo_params)
-        format.html { redirect_to @platillo, notice: 'Platillo was successfully updated.' }
+        format.html { redirect_to platillos_path, notice: 'Platillo was successfully updated.' }
         format.json { render :show, status: :ok, location: @platillo }
       else
         format.html { render :edit }

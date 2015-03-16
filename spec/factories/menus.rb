@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :menu do
-    nombre "MyString"
-fecha "2015-02-27"
+    sequence(:nombre) { |n| "Menu #{n}" }
+    fecha "2015-02-27"
   end
 
 end
