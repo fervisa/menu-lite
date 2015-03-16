@@ -10,7 +10,7 @@ init = ->
 bindDeletePlatillo = (scope=$(document)) ->
   scope.find('a.delete').click (e) ->
     e.preventDefault()
-    $(this).parent().remove()
+    $(this).parents('li.list-group-item').remove()
 
 bindSearchMenu = ->
   $('#envio_desde, #envio_hasta').change (e) ->

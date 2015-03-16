@@ -1,6 +1,10 @@
 %li.list-group-item
-  = link_to platillo, class: 'delete pull-right text-danger' do
-    %i.glyphicon.glyphicon-remove
+  .pull-right
+    %span.label.label-default
+      = platillo.tipo
+    &nbsp;
+    = link_to platillo, class: 'delete text-danger' do
+      %i.glyphicon.glyphicon-remove
   %h4= platillo.nombre
   %p= platillo.descripcion
   = hidden_field_tag 'menu[platillo_ids][]', platillo.id
