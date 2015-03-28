@@ -19,11 +19,21 @@
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
             %li{ class: controller_name == 'menus' ? 'active' : '' }
-              = link_to 'Menús', menus_path
+              = link_to menus_path do
+                %i.glyphicon.glyphicon-list-alt
+                &nbsp;
+                Menús
             %li{ class: controller_name == 'platillos' ? 'active' : '' }
-              = link_to 'Platillos', platillos_path
+              = link_to platillos_path do
+                %i.glyphicon.glyphicon-cutlery
+                &nbsp;
+                Platillos
             %li
-              = link_to 'Enviar menús', generar_envio_menus_path
+              = link_to generar_envio_menus_path do
+                %i.glyphicon.glyphicon-envelope
+                &nbsp;
+                Enviar menús
+
     .container
       .row
         .span12

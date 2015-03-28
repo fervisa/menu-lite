@@ -1,4 +1,14 @@
-%h1 Platillos
+.pull-right
+  = link_to new_platillo_path, class: 'btn btn-lg btn-primary' do
+    %i.glyphicon.glyphicon-plus
+    Nuevo Platillo
+
+%h1
+  %i.glyphicon.glyphicon-cutlery
+  &nbsp;
+  Platillos
+
+%hr
 
 %table.table
   %thead
@@ -19,10 +29,3 @@
             = link_to 'Detalles', platillo, class: 'btn btn-default'
             = link_to 'Modificar', edit_platillo_path(platillo), class: 'btn btn-primary'
             = link_to 'Eliminar', platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
-
-%br
-
-.pull-right
-  = link_to new_platillo_path, class: 'btn btn-lg btn-primary' do
-    %i.glyphicon.glyphicon-plus
-    Nuevo Platillo
