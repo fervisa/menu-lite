@@ -17,7 +17,8 @@ class MenusController < ApplicationController
 
   # GET /menus/new
   def new
-    @menu = Menu.new
+    fecha = params[:fecha].to_date rescue Date.today
+    @menu = Menu.new fecha: fecha
   end
 
   # GET /menus/1/edit
