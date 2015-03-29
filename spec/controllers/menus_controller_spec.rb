@@ -78,6 +78,23 @@ RSpec.describe MenusController, type: :controller do
       get :new, {}, valid_session
       expect(assigns(:menu)).to be_a_new(Menu)
     end
+
+    it "new menu#fecha has today date" do
+      get :new, {}, valid_session
+      expect(assigns(:menu).fecha).to eq Date.today
+    end
+
+    context 'fecha argument' do
+      it "new menu#fecha has argument's date" do
+        get :new, { fecha: '2015-03-28' }, valid_session
+        expect(assigns(:menu).fecha).to eq Date.new(2015, 03, 28)
+      end
+
+      it "new menu#fecha defaults to today" do
+        get :new, { fecha: '2015-02-50' }, valid_session
+        expect(assigns(:menu).fecha).to eq Date.today
+      end
+    end
   end
 
   describe "GET #edit" do

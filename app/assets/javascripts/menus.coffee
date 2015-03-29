@@ -21,10 +21,30 @@ bindSearchMenu = ->
     $.getScript "/menus?#{ params }"
 
 loadMenusCalendar = ->
-  $('#menus-calendar').fullCalendar
+  calendar = $('#menus-calendar').fullCalendar
     events: '/menus.json'
     startParam: 'desde'
     endParam: 'hasta'
+    selectable: true
+    select: (start, end) ->
+      clearClientEvents(calendar)
+      createClientEvent(calendar, start, end)
+
+clearClientEvents = (calendar) ->
+  calendar.fullCalendar 'removeEvents', (event) ->
+    !event.id?
+
+createClientEvent = (calendar, start, end) ->
+  date = start.format("YYYY-MM-DD")
+  url = "#{ window.location.pathname }/new?fecha=#{ date }"
+  calendar.fullCalendar 'renderEvent'
+  ,
+    title: '+ Nuevo menú'
+    start: start
+    end: end
+    url: url
+  , true
+  calendar.fullCalendar 'unselect'
 
 $(document).on 'ready page:load', init
 window.bindDeletePlatillo = bindDeletePlatillo
