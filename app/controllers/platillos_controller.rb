@@ -5,7 +5,7 @@ class PlatillosController < ApplicationController
   # GET /platillos
   # GET /platillos.json
   def index
-    @platillos = Platillo.all
+    @platillos = Platillo.all.order 'nombre ASC'
   end
 
   # GET /platillos/1

@@ -26,6 +26,9 @@
         %td= platillo.descripcion
         %td
           .btn-group
-            = link_to 'Detalles', platillo, class: 'btn btn-default'
-            = link_to 'Modificar', edit_platillo_path(platillo), class: 'btn btn-primary'
-            = link_to 'Eliminar', platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+            = link_to platillo, class: 'btn btn-default btn-sm', title: 'Detalles' do
+              %i.glyphicon.glyphicon-search
+            = link_to edit_platillo_path(platillo), class: 'btn btn-primary btn-sm', title: 'Editar' do
+              %i.glyphicon.glyphicon-edit
+            = link_to platillo, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm', title: 'Eliminar' do
+              %i.glyphicon.glyphicon-trash
