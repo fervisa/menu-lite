@@ -1,10 +1,11 @@
-%li.list-group-item
-  .pull-right
-    %span.label.label-default
+.col-md-4.platillo
+  .panel.panel-default
+    .panel-heading
       = platillo.tipo
-    &nbsp;
-    = link_to platillo, class: 'delete text-danger' do
-      %i.glyphicon.glyphicon-remove
-  %h4= platillo.nombre
-  %p= platillo.descripcion
-  = hidden_field_tag 'menu[platillo_ids][]', platillo.id
+      .pull-right
+        = link_to platillo, class: 'delete text-danger' do
+          %i.glyphicon.glyphicon-remove-circle
+    .panel-body
+      %h4= platillo.nombre
+      %p= platillo.descripcion
+      = hidden_field_tag 'menu[platillo_ids][]', platillo.id

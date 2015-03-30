@@ -25,6 +25,7 @@ feature 'Gestión de menús' do
   end
 
   scenario 'menu de platillos nuevos', js: true do
+    pending "Feature has been removed until next release"
     expect{
       acceder_a_nuevo_menu
       rellenar_formulario_menu
@@ -43,7 +44,8 @@ feature 'Gestión de menús' do
     expect(page).to have_content 'Platillo 4'
   end
 
-  scenario 'agregar platillo a menu existente', js: true do
+  scenario 'agregar nuevos platillos a menu existente', js: true do
+    pending "Feature has been removed until next release"
     menu = FactoryGirl.create :menu, platillo_ids: Platillo.pluck(:id)
 
     visit edit_menu_path menu
@@ -60,11 +62,27 @@ feature 'Gestión de menús' do
     expect(page).to have_content 'Platillo 4'
   end
 
+  scenario 'agregar platillos existentes a menu existente', js: true do
+    menu = FactoryGirl.create :menu, platillos: [FactoryGirl.create(:platillo, nombre: 'Platillo 4')]
+
+    visit edit_menu_path menu
+    agregar_platillos_a_menu
+    click_button 'Guardar menu'
+
+    expect(page).to have_content menu.nombre
+
+    click_link menu.nombre
+
+    expect(page).to have_content 'Platillo 2'
+    expect(page).to have_content 'Platillo 3'
+    expect(page).to have_content 'Platillo 4'
+  end
+
   scenario 'eliminar platillo de menu existente', js: true do
     menu = FactoryGirl.create :menu, platillo_ids: Platillo.pluck(:id)
 
     visit edit_menu_path menu
-    all('#platillos a.delete').last.click
+    all('form a.delete').last.click
     click_button 'Guardar menu'
 
     expect(page).to have_content menu.nombre
@@ -94,11 +112,15 @@ feature 'Gestión de menús' do
   end
 
   def agregar_platillos_a_menu
-    within '#platillos_form' do 
+    find('.platillo-add').click
+    within '.agregar-platillo' do 
       select 'Platillo 2', from: 'id'
-      click_button 'Agregar'
+      click_link 'Agregar platillo'
+    end
+    find('.platillo-add').click
+    within '.agregar-platillo' do 
       select 'Platillo 3', from: 'id'
-      click_button 'Agregar'
+      click_link 'Agregar platillo'
     end
   end
 

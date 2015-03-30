@@ -3,14 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 init = ->
-  bindDeletePlatillo($('#platillos'))
+  bindDeletePlatillo($('form[class$="_menu"]'))
   bindSearchMenu() if $('form#new_envio').length
   loadMenusCalendar() if $('#menus-calendar').length
+  loadAddPlatilloEvents() if $('.platillo-add')
+
+loadAddPlatilloEvents = () ->
+  $('.platillo-add, #platillo-cancelar').click (e) ->
+    e.preventDefault()
+    $('.agregar-platillo').toggleClass('hidden')
+
+  $('a#agregar-platillo').click (e) ->
+    e.preventDefault()
+    url = $(this).attr 'href'
+    url = "#{ url }?id=#{ $('#id').val() }"
+    $.getScript url
 
 bindDeletePlatillo = (scope=$(document)) ->
   scope.find('a.delete').click (e) ->
     e.preventDefault()
-    $(this).parents('li.list-group-item').remove()
+    $(this).parents('.platillo').remove()
 
 bindSearchMenu = ->
   $('#envio_desde, #envio_hasta').change (e) ->

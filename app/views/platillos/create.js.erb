@@ -1,5 +1,6 @@
 <% if @platillo.persisted? %>
   newPlatilloRow = $('<%= j render @platillo %>');
   bindDeletePlatillo(newPlatilloRow);
-  $('#platillos').append(newPlatilloRow);
+  $('.agregar-platillo:first').before(newPlatilloRow);
+  $('.agregar-platillo').toggleClass('hidden');
 <% end %>

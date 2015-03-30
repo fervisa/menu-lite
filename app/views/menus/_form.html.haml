@@ -1,42 +1,32 @@
-.row
-  .col-md-8
-    = simple_form_for(@menu) do |f|
-      = f.error_notification
+= simple_form_for(@menu) do |f|
+  = f.error_notification
 
-      .form-inputs
-        = f.input :nombre
-        = f.input :fecha, as: :datepicker
+  .form-inputs
+    = f.input :nombre
+    = f.input :fecha, as: :datepicker
 
-        %ul#platillos
-          = render @menu.platillos
-
-      .form-actions.pull-right
-        = f.button :submit, 'Guardar menu'
-        = link_to 'Cancelar', menus_path, class: 'btn btn-danger'
-
-  .col-md-4
-    .panel-group#accordion-platillos{ role: 'tablist' }
+  .row
+    - @menu.platillos.each do |platillo|
+      = render platillo
+    .col-md-4.agregar-platillo.hidden
       .panel.panel-default
-        .panel-heading{ role: 'tab' }
-          %h4.panel-title
-            %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'href' => '#search-platillo', 'data-parent' => '#accordion-platillos' }
-              Buscar platillo
-        #search-platillo.panel-collapse.collapse.in{ role: 'tabpanel' }
-          .panel-body
-            = form_tag add_platillo_path, id: 'platillos_form', class: 'form-inline', method: :get, remote:true do
-              .form-group
-                = select_tag :id, options_from_collection_for_select(Platillo.all, :id, :nombre), class: 'form-control'
-              = button_tag 'Agregar', class: 'btn btn-default'
+        .panel-heading
+          Agregar platillo
+        .panel-body
+          .form-group
+            = select_tag :id, options_from_collection_for_select(Platillo.all.order('nombre ASC'), :id, :nombre), class: 'form-control'
+          .pull-right
+            = link_to 'Agregar platillo', add_platillo_path, class: 'btn btn-default', id: 'agregar-platillo'
+            = link_to 'Cancelar', '#', class: 'btn btn-danger', id: 'platillo-cancelar'
 
-      .panel.panel-default
-        .panel-heading{ role: 'tab' }
-          %h4.panel-title
-            %a.collapsed{ 'data-toggle' => 'collapse', 'aria-expanded' => 'false', 'href' => '#new-platillo', 'data-target' => '#new-platillo', 'data-parent' => '#accordion-platillos', 'aria-controls' => 'new-platillo' }
-              Nuevo platillo
-        #new-platillo.panel-collapse.collapse{ role: 'tabpanel' }
-          .panel-body
-            = simple_form_for Platillo.new, remote: true do |f|
-              = f.input :nombre
-              = f.input :tipo, collection: Platillo.tipos.keys
-              = f.input :descripcion
-              = f.button :submit, 'Crear y agregar'
+    .col-md-4.agregar-platillo
+      .panel.panel-default.platillo-add
+        .panel-body
+          %p
+            %i.glyphicon.glyphicon-plus-sign
+          %p
+            Agregar platillo
+
+  .form-actions.pull-right
+    = f.button :submit, 'Guardar menu'
+    = link_to 'Cancelar', menus_path, class: 'btn btn-danger'
