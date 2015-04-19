@@ -1,11 +1,9 @@
-.col-md-3
-  .panel.panel-default
-    .panel-heading
-      = l menu.fecha, format: :with_dayname
-    .panel-body.list-group
+.panel.panel-default
+  .panel-heading{ id: "cabecera-menu-#{ menu.id }", role: "tab" }
+    %h4.panel-title
+      %a{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#menus", "data-toggle" => "collapse", :href => "#collapse-menu-#{ menu.id }"}
+        = l menu.fecha, format: :with_dayname
+  .panel-collapse.collapse{ id: "collapse-menu-#{ menu.id }","aria-labelledby" => "cabecera-menu-#{ menu.id }", role: "tabpanel" }
+    %ul.list-group
       - menu.platillos.each do |platillo|
-        %a.list-group-item{ href: true }
-          %h4.list-group-item-heading
-            = platillo.nombre      
-          %p.list-group-item-text
-            = platillo.descripcion
+        %li.list-group-item= platillo.nombre
