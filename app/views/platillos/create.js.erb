@@ -3,4 +3,9 @@
   bindDeletePlatillo(newPlatilloRow);
   $('.agregar-platillo:first').before(newPlatilloRow);
   $('.agregar-platillo').toggleClass('hidden');
+  <% if @platillo.principal? %>
+  if( $('input#menu_nombre').val() == '' ){
+    $('input#menu_nombre').val('<%= @platillo.nombre %>');
+  }
+  <% end %>
 <% end %>
