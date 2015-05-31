@@ -1,19 +1,18 @@
 %h2 
-  %i.glyphicon.glyphicon-envelope
+  %i.glyphicon.glyphicon-print
   &nbsp;
-  Enviar menús
+  Imprimir menús
 
 %hr
 
 .row
   .col-md-7
-    = simple_form_for @envio, url: enviar_menus_path, method: :post do |f|
+    = simple_form_for @envio, url: imprimir_menus_path, method: :post do |f|
       = f.input :desde, as: :datepicker
       = f.input :hasta, as: :datepicker
-      = f.input :email
 
       .text-right
-        = f.button :submit, 'Enviar menús'
+        = f.button :submit, 'Imprimir menús'
 
   .col-md-5
     #menus.panel-group{ "aria-multiselectable" => "true", role: "tablist" }

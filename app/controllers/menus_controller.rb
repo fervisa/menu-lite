@@ -79,6 +79,11 @@ class MenusController < ApplicationController
     end
   end
 
+  def imprimir
+    @envio = Envio.new params[:envio]
+    render :generar_envio and return unless @envio.valid?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_menu

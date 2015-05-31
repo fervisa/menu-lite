@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   resources :menus do
     get :generar_envio, on: :collection
-    post :enviar, on: :collection
+    # post :enviar, on: :collection
+    post :imprimir, on: :collection
   end
 
   match 'platillos/add' => 'platillos#add', as: :add_platillo, via: :get

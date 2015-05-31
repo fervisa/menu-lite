@@ -1,0 +1,16 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th.text-center{ colspan: 2 }
+        Menús del #{ l @envio.desde.to_date, format: :with_dayname } al #{ l @envio.hasta.to_date, format: :with_dayname }
+  %tbody
+    - @envio.menus.each do |menu|
+      %tr
+        %th= l menu.fecha, format: :with_dayname
+        %td
+          %ul
+            - menu.platillos.each do |platillo|
+              %li #{ platillo.nombre }: #{ platillo.descripcion }
+
+:coffee
+  window.print()
