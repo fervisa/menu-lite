@@ -203,6 +203,7 @@ RSpec.describe MenusController, type: :controller do
 
   describe 'POST enviar' do
     before :each do
+      skip "deprecated for #imprimir"
       @menu_1 = Menu.create! valid_attributes
       @menu_2 = Menu.create! valid_attributes.merge({ fecha: Date.today + 10.days })
     end

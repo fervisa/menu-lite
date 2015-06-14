@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Envio do
   it { should validate_presence_of :desde }
   it { should validate_presence_of :hasta }
-  it { should validate_presence_of :email }
 
   describe 'date ranges' do
     it 'should validate date overlapping' do
